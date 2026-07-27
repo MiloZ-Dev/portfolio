@@ -1,0 +1,270 @@
+---
+import { projects } from '../data/content';
+---
+<section class="layer max-w-295 mx-auto px-7 pt-25 pb-20 border-b border-border opacity-0 translate-y-4 transition-[opacity,transform] duration-600ms ease-out [&.in-view]:opacity-100 [&.in-view]:translate-y-0 last-of-type:border-b-0" id="projects" data-layer-name="Proyectos">
+    <div class="eyebrow font-mono text-[12.5px] text-accent tracking-[0.08em] uppercase flex items-center gap-2.5 mb-4.5 before:content-[''] before:w-6 before:h-0.5 before:bg-linear-to-r before:from-accent before:to-secondary before:rounded-sm">03 — proyectos</div>
+    <h2 class="section-title text-[1.7rem] sm:text-[2.1rem] font-bold mb-2 font-display">Proyectos destacados</h2>
+
+    <div class="overflow-hidden rounded-card">
+        <!-- Track del carrusel -->
+        <div id="projCarouselTrack" class="flex transition-transform duration-500 ease-out">
+            {projects.map((p) => {
+                // 1. Imagen que se muestra en la tarjeta (Prioriza la portada 'image')
+                const coverImage = p.image || (p.images && p.images.length > 0 ? p.images[0] : null);
+                
+                // 2. Imágenes que se muestran en el Lightbox (Prioriza el array 'images')
+                const galleryImages = p.images && p.images.length > 0 ? p.images : (p.image ? [p.image] : []);
+
+                return (
+                    <div class="w-full shrink-0 grid grid-cols-1 md:grid-cols-[1.3fr_1fr] gap-0 bg-bg-card border border-border rounded-card overflow-hidden shadow-card">
+                        
+                        <!-- Contenedor de la Imagen con Opción 2 + Trigger de Modal -->
+                        <div class="relative h-65 md:h-105 overflow-hidden group bg-bg-secondary flex flex-col items-center justify-center gap-2 text-text-muted border-r border-border/50 [background:repeating-linear-gradient(135deg,var(--color-bg-secondary),var(--color-bg-secondary)_10px,var(--color-bg-card)_10px,var(--color-bg-card)_20px)]">
+                            {coverImage ? (
+                                <button 
+                                    type="button"
+                                    class="open-lightbox-btn w-full h-full text-left relative cursor-pointer focus:outline-none"
+                                    data-images={JSON.stringify(galleryImages)}
+                                    data-img-title={p.name}
+                                    aria-label={`Ampliar capturas de ${p.name}`}
+                                >
+                                    <img 
+                                        src={coverImage} 
+                                        alt={`Portada de ${p.name}`} 
+                                        class="w-full h-full object-cover object-center brightness-[0.88] contrast-[1.02] transition-all duration-500 ease-out group-hover:brightness-100 group-hover:scale-105" 
+                                    />
+                                    <!-- Badge al Hover -->
+                                    <div class="absolute inset-0 bg-bg-primary/20 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center">
+                                        <span class="font-mono text-xs bg-bg-card/90 text-text-primary px-3.5 py-2 rounded-full border border-border shadow-lg flex items-center gap-2 transform translate-y-2 group-hover:translate-y-0 transition-transform duration-300">
+                                            <i class="fas fa-search-plus text-accent"></i>
+                                            Vista previa {galleryImages.length > 1 ? `(${galleryImages.length})` : ''}
+                                        </span>
+                                    </div>
+                                </button>
+                            ) : (
+                                <>
+                                    <i class="fas fa-camera text-4xl"></i>
+                                    <span class="font-mono text-[10.5px] tracking-wider uppercase">Screenshot pendiente</span>
+                                </>
+                            )}
+                        </div>
+
+                        <!-- Detalle del Proyecto -->
+                        <div class="p-7 sm:p-9 flex flex-col justify-center">
+                            <h3 class="text-2xl mb-2 font-display font-bold">{p.name}</h3>
+                            <div class="font-mono text-[11px] text-secondary mb-4">{p.roleTag}</div>
+                            <p class="text-text-secondary text-[0.98rem] mb-6 leading-relaxed">{p.description}</p>
+                            <div class="flex flex-wrap gap-2 mb-6">
+                                {p.tags.map((t) => (
+                                    <span class="bg-bg-primary border border-border text-text-secondary text-[0.72rem] font-semibold px-3.5 py-0.5 rounded-full font-mono">{t}</span>
+                                ))}
+                            </div>
+                            <div class="flex gap-4">
+                                {p.repoUrl && (
+                                    <a href={p.repoUrl} target="_blank" rel="noopener noreferrer" class="font-semibold text-accent text-[0.9rem] transition-colors duration-200 hover:text-secondary">
+                                        <i class="fab fa-github"></i> Repo
+                                    </a>
+                                )}
+                                
+                                {!p.repoUrl && !p.demoUrl && (
+                                    <span class="font-semibold text-text-muted text-[0.9rem] flex items-center gap-1.5">
+                                        <i class="fas fa-lock text-xs"></i> {p.demoLabel || 'Proyecto Privado'}
+                                    </span>
+                                )}
+                            </div>
+                        </div>
+                    </div>
+                );
+            })}
+        </div>
+    </div>
+
+    <!-- Controles del carrusel -->
+    <div class="flex items-center justify-center gap-5 mt-6">
+        <button id="projPrev" aria-label="Proyecto anterior" class="w-10 h-10 rounded-full bg-bg-card border border-border text-text-primary flex items-center justify-center transition-all duration-200 hover:border-accent hover:text-accent shadow-card shrink-0">
+            <i class="fas fa-chevron-left"></i>
+        </button>
+        <div id="projDots" class="flex items-center gap-2.5">
+            {projects.map((_, i) => (
+                <button aria-label={`Ir al proyecto ${i + 1}`} data-index={i} class="proj-dot w-2.5 h-2.5 rounded-full bg-border transition-all duration-200 hover:bg-accent"></button>
+            ))}
+        </div>
+        <button id="projNext" aria-label="Siguiente proyecto" class="w-10 h-10 rounded-full bg-bg-card border border-border text-text-primary flex items-center justify-center transition-all duration-200 hover:border-accent hover:text-accent shadow-card shrink-0">
+            <i class="fas fa-chevron-right"></i>
+        </button>
+    </div>
+</section>
+
+<!-- Modal Lightbox Galería -->
+<div 
+    id="lightboxModal" 
+    class="fixed inset-0 z-50 bg-black/80 backdrop-blur-sm opacity-0 pointer-events-none transition-opacity duration-300 flex items-center justify-center p-4 sm:p-8"
+    aria-hidden="true"
+>
+    <div class="relative max-w-6xl w-full max-h-[90vh] bg-bg-card border border-border rounded-card overflow-hidden shadow-2xl flex flex-col transform scale-95 transition-transform duration-300" id="lightboxContent">
+        <!-- Header del Modal -->
+        <div class="px-5 py-3 border-b border-border flex items-center justify-between bg-bg-secondary">
+            <span id="lightboxTitle" class="font-mono text-xs text-text-secondary"></span>
+            <div class="flex items-center gap-4">
+                <span id="lightboxCounter" class="font-mono text-xs text-accent"></span>
+                <button id="closeLightbox" aria-label="Cerrar vista previa" class="text-text-muted hover:text-accent transition-colors p-1">
+                    <i class="fas fa-times text-lg"></i>
+                </button>
+            </div>
+        </div>
+
+        <!-- Visor de la Imagen con Flechas de Galería -->
+        <div class="relative overflow-auto p-2 bg-bg-primary/50 flex justify-center items-center min-h-[50vh]">
+            <!-- Flecha Izquierda -->
+            <button 
+                id="lbPrev" 
+                class="absolute left-4 z-10 w-10 h-10 rounded-full bg-bg-card/80 border border-border text-text-primary flex items-center justify-center transition-all hover:border-accent hover:text-accent backdrop-blur-xs cursor-pointer"
+                aria-label="Imagen anterior"
+            >
+                <i class="fas fa-chevron-left"></i>
+            </button>
+
+            <img id="lightboxImage" src="" alt="" class="max-w-full h-auto object-contain rounded transition-all duration-300" />
+
+            <!-- Flecha Derecha -->
+            <button 
+                id="lbNext" 
+                class="absolute right-4 z-10 w-10 h-10 rounded-full bg-bg-card/80 border border-border text-text-primary flex items-center justify-center transition-all hover:border-accent hover:text-accent backdrop-blur-xs cursor-pointer"
+                aria-label="Siguiente imagen"
+            >
+                <i class="fas fa-chevron-right"></i>
+            </button>
+        </div>
+    </div>
+</div>
+
+<script>
+    // --- Lógica del Carrusel Principal ---
+    const track = document.getElementById('projCarouselTrack');
+    const prevBtn = document.getElementById('projPrev');
+    const nextBtn = document.getElementById('projNext');
+    const dots = Array.from(document.querySelectorAll<HTMLButtonElement>('.proj-dot'));
+    const totalSlides = dots.length;
+    let current = 0;
+
+    const updateCarousel = () => {
+        if (!track) return;
+        track.style.transform = `translateX(-${current * 100}%)`;
+        dots.forEach((dot, i) => {
+            dot.classList.toggle('bg-accent', i === current);
+            dot.classList.toggle('w-6', i === current);
+            dot.classList.toggle('bg-border', i !== current);
+        });
+    };
+
+    prevBtn?.addEventListener('click', () => {
+        current = current === 0 ? totalSlides - 1 : current - 1;
+        updateCarousel();
+    });
+
+    nextBtn?.addEventListener('click', () => {
+        current = current === totalSlides - 1 ? 0 : current + 1;
+        updateCarousel();
+    });
+
+    dots.forEach((dot) => {
+        dot.addEventListener('click', () => {
+            current = parseInt(dot.dataset.index || '0', 10);
+            updateCarousel();
+        });
+    });
+
+    updateCarousel();
+
+    // --- Lógica del Lightbox Multigalería ---
+    const modal = document.getElementById('lightboxModal');
+    const modalContent = document.getElementById('lightboxContent');
+    const modalImg = document.getElementById('lightboxImage') as HTMLImageElement;
+    const modalTitle = document.getElementById('lightboxTitle');
+    const modalCounter = document.getElementById('lightboxCounter');
+    const closeBtn = document.getElementById('closeLightbox');
+    const lbPrev = document.getElementById('lbPrev') as HTMLButtonElement;
+    const lbNext = document.getElementById('lbNext') as HTMLButtonElement;
+    const openBtns = document.querySelectorAll<HTMLButtonElement>('.open-lightbox-btn');
+
+    let currentGallery: string[] = [];
+    let galleryIndex = 0;
+
+    const updateGalleryView = () => {
+        if (!modalImg || !modalCounter) return;
+        modalImg.src = currentGallery[galleryIndex];
+        
+        const hasMultiple = currentGallery.length > 1;
+        modalCounter.textContent = hasMultiple ? `${galleryIndex + 1} / ${currentGallery.length}` : '';
+
+        // Ocultar o mostrar flechas del lightbox según la cantidad de imágenes
+        if (lbPrev && lbNext) {
+            lbPrev.style.display = hasMultiple ? 'flex' : 'none';
+            lbNext.style.display = hasMultiple ? 'flex' : 'none';
+        }
+    };
+
+    const openModal = (images: string[], title: string) => {
+        if (!modal || !modalTitle || !modalContent || images.length === 0) return;
+        currentGallery = images;
+        galleryIndex = 0;
+
+        modalTitle.textContent = `Captura — ${title}`;
+        updateGalleryView();
+        
+        modal.classList.remove('opacity-0', 'pointer-events-none');
+        modalContent.classList.remove('scale-95');
+        modalContent.classList.add('scale-100');
+        document.body.style.overflow = 'hidden';
+    };
+
+    const closeModal = () => {
+        if (!modal || !modalContent) return;
+        modal.classList.add('opacity-0', 'pointer-events-none');
+        modalContent.classList.remove('scale-100');
+        modalContent.classList.add('scale-95');
+        document.body.style.overflow = '';
+    };
+
+    // Navegación dentro del modal
+    lbPrev?.addEventListener('click', (e) => {
+        e.stopPropagation();
+        galleryIndex = galleryIndex === 0 ? currentGallery.length - 1 : galleryIndex - 1;
+        updateGalleryView();
+    });
+
+    lbNext?.addEventListener('click', (e) => {
+        e.stopPropagation();
+        galleryIndex = galleryIndex === currentGallery.length - 1 ? 0 : galleryIndex + 1;
+        updateGalleryView();
+    });
+
+    openBtns.forEach((btn) => {
+        btn.addEventListener('click', () => {
+            const images = JSON.parse(btn.dataset.images || '[]');
+            const title = btn.dataset.imgTitle || '';
+            openModal(images, title);
+        });
+    });
+
+    closeBtn?.addEventListener('click', closeModal);
+
+    modal?.addEventListener('click', (e) => {
+        if (e.target === modal) closeModal();
+    });
+
+    // Control con teclado (Esc y Flechas <- ->)
+    document.addEventListener('keydown', (e) => {
+        if (modal?.classList.contains('pointer-events-none')) return;
+        
+        if (e.key === 'Escape') closeModal();
+        if (e.key === 'ArrowLeft' && currentGallery.length > 1) {
+            galleryIndex = galleryIndex === 0 ? currentGallery.length - 1 : galleryIndex - 1;
+            updateGalleryView();
+        }
+        if (e.key === 'ArrowRight' && currentGallery.length > 1) {
+            galleryIndex = galleryIndex === currentGallery.length - 1 ? 0 : galleryIndex + 1;
+            updateGalleryView();
+        }
+    });
+</script>

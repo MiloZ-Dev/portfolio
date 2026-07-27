@@ -1,0 +1,132 @@
+---
+import '../styles/global.css';
+import { navSections } from '../data/content';
+
+interface Props {
+  title?: string;
+  description?: string;
+}
+
+const {
+  title = 'Camilo Zapata | MiloZ-Dev — Full Stack Developer',
+  description = 'Camilo Zapata (MiloZ-Dev) — Desarrollador Full Stack especializado en sistemas de lead routing, optimización logística e integraciones de IA.',
+} = Astro.props;
+---
+
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>{title}</title>
+    <meta name="description" content={description} />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600;9..144,700&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" />
+</head>
+<body>  
+    <div class="bg-grid" aria-hidden="true"></div>
+
+    
+    <nav class="stack-rail" aria-label="Navegación por secciones">
+        <div class="rail-line" aria-hidden="true"></div>
+        {navSections.map((s) => (
+            <a href={`#${s.id}`} class="rail-item" data-target={s.id}>
+                <span class="rail-dot"></span>
+                <span class="rail-text"><span class="rail-num">{s.num}</span><span class="rail-name">{s.name}</span></span>
+            </a>
+        ))}
+    </nav>
+
+    <div class="mobile-rail" aria-hidden="true">
+        <div class="mobile-rail-label" id="mobileLayerLabel">01 · Inicio</div>
+        <div class="mobile-rail-track"><div class="mobile-rail-fill" id="mobileLayerFill"></div></div>
+    </div>
+
+    <header id="siteHeader">
+        <div class="container nav-container">
+            <div class="logo">
+                <span class="logo-name">Camilo Zapata</span>
+                <span class="logo-handle">MiloZ-Dev</span>
+            </div>
+            <div class="flex items-center gap-5">
+                <a
+                    href="https://www.linkedin.com/in/miloz-dev/"
+                    target="_blank"
+                    rel="noopener"
+                    aria-label="LinkedIn"
+                    class="text-xl text-text-muted transition-all duration-200 hover:text-accent hover:scale-110"
+                >
+                    <i class="fab fa-linkedin-in"></i>
+                </a>
+                <a
+                    href="mailto:zepta2249@gmail.com"
+                    class="font-mono text-[13px] px-4.5 py-2.5 rounded-lg inline-flex items-center gap-2 transition-all duration-200 bg-secondary-dim border-2 border-secondary text-text-primary font-bold hover:-translate-y-0.5 hover:bg-secondary hover:text-bg-primary"
+                >
+                    <i class="fas fa-envelope"></i> Contactar
+                </a>
+            </div>
+        </div>
+    </header>
+
+    <main>
+        <slot />
+    </main>
+
+    <footer class="opacity-0 translate-y-6 transition-[opacity,transform] duration-700 ease-out [&.in-view]:opacity-100 [&.in-view]:translate-y-0">
+        <span>&copy; 2026 Camilo Zapata · MiloZ-Dev. Trabajo con mucho café <i class="fas fa-heart"></i></span>
+        <span>Candelaria, Colombia</span>
+    </footer>
+
+    <script>
+        const sections = Array.from(document.querySelectorAll<HTMLElement>('.layer'));
+        const railItems = Array.from(document.querySelectorAll<HTMLElement>('.rail-item'));
+        const mobileLabel = document.getElementById('mobileLayerLabel') as HTMLElement;
+        const mobileFill = document.getElementById('mobileLayerFill') as HTMLElement;
+
+        const revealObserver = new IntersectionObserver((entries) => {
+            entries.forEach((entry) => {
+                if (entry.isIntersecting) entry.target.classList.add('in-view');
+            });
+        }, { threshold: 0.08 });
+        sections.forEach((s) => revealObserver.observe(s));
+
+        // Añadido: el footer usa el mismo observer, mismo efecto de aparición
+        const footer = document.querySelector('footer');
+        if (footer) revealObserver.observe(footer);
+
+        const activeObserver = new IntersectionObserver((entries) => {
+            entries.forEach((entry) => {
+                const id = entry.target.id;
+                if (entry.isIntersecting) {
+                    railItems.forEach((item) => {
+                        item.classList.toggle('active', item.dataset.target === id);
+                    });
+                    const name = entry.target.getAttribute('data-layer-name') ?? '';
+                    const idx = sections.findIndex((s) => s.id === id);
+                    const num = String(idx + 1).padStart(2, '0');
+                    mobileLabel.textContent = `${num} · ${name}`;
+                    const pct = ((idx + 1) / sections.length) * 100;
+                    mobileFill.style.width = `${pct}%`;
+                }
+            });
+        }, { threshold: 0, rootMargin: '-50% 0px -50% 0px' });
+        sections.forEach((s) => activeObserver.observe(s));
+
+        const siteHeader = document.getElementById('siteHeader');
+        const SCROLL_THRESHOLD = 40; // px antes de activar el efecto
+
+        const handleHeaderScroll = () => {
+            if (window.scrollY > SCROLL_THRESHOLD) {
+                siteHeader?.classList.add('is-scrolled');
+            } else {
+                siteHeader?.classList.remove('is-scrolled');
+            }
+        };
+
+        handleHeaderScroll(); // por si la página carga ya scrolleada
+        window.addEventListener('scroll', handleHeaderScroll, { passive: true });
+    </script>
+</body>
+</html>

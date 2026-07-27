@@ -1,0 +1,15 @@
+# Dependencias
+node_modules/
+
+# Build de Astro
+dist/
+.astro/
+
+# Variables de entorno
+.env
+.env.production
+
+# Sistema operativo / editor
+.DS_Store
+Thumbs.db
+.vscode/

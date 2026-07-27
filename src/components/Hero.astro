@@ -1,0 +1,94 @@
+---
+---
+<section class="layer max-w-295 mx-auto px-7 pt-32 pb-20 border-b border-border opacity-0 translate-y-4 transition-[opacity,transform] duration-600ms ease-out [&.in-view]:opacity-100 [&.in-view]:translate-y-0 last-of-type:border-b-0" id="hero" data-layer-name="Inicio">
+    <div class="eyebrow font-mono text-[12.5px] text-accent tracking-[0.08em] uppercase flex items-center gap-2.5 mb-4.5 before:content-[''] before:w-6 before:h-0.5 before:bg-linear-to-r before:from-accent before:to-secondary before:rounded-sm">01 — quién soy</div>
+    <div class="grid grid-cols-1 min-[820px]:grid-cols-[1.15fr_0.85fr] gap-14 items-center">
+        <div>
+            <h1 class="text-[clamp(2.4rem,5vw,3.6rem)] leading-[1.05] mb-1.5 font-display font-bold">Hola, soy <br /><span class="bg-linear-to-br from-accent to-secondary bg-clip-text text-transparent">Camilo Zapata</span></h1>
+            <div class="font-mono text-[15px] text-text-muted mb-5.5">alias <span class="text-secondary">MiloZ-Dev</span> · Candelaria, Valle del Cauca, Colombia</div>
+            <p class="text-[17px] text-text-secondary max-w-[48ch] mb-8">
+                Desarrollador Full Stack con 3 años de experiencia.
+            </p>
+
+            <div class="flex gap-3.5 flex-wrap">
+                <a
+                    href="#contact"
+                    class="font-mono text-[13.5px] py-3 px-5.5 rounded-[9px] inline-flex items-center gap-2 transition-all duration-200 ease-out cursor-pointer bg-secondary-dim border-2 border-secondary text-text-primary font-bold hover:-translate-y-0.5 hover:bg-secondary hover:text-bg-primary hover:shadow-[0_8px_25px_var(--color-accent-glow)]"
+                >
+                    <i class="fas fa-envelope"></i> Contactar
+                </a>
+            </div>
+
+            <div class="mt-10">
+                <div class="font-mono text-[11px] text-text-muted tracking-[0.06em] uppercase">Arquitectura en producción</div>
+                <svg class="w-full h-auto block" viewBox="0 0 900 180" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+                    <path class="stroke-border-light stroke-[1.5] fill-none" d="M20,55 L120,55" />
+                    <path class="stroke-border-light stroke-[1.5] fill-none" d="M120,55 L230,55" />
+                    <path class="stroke-border-light stroke-[1.5] fill-none" d="M230,55 L330,55" />
+                    <path class="stroke-border-light stroke-[1.5] fill-none" d="M330,55 L440,55" />
+                    <path class="stroke-border-light stroke-[1.5] fill-none" d="M440,55 Q560,20 670,55" />
+                    <path class="stroke-border-light stroke-[1.5] fill-none" d="M670,55 L790,55" />
+
+                    <path class="stroke-border-light stroke-[1.5] fill-none" d="M330,55 L420,105" />
+                    <path class="stroke-border-light stroke-[1.5] fill-none" d="M420,105 C520,140 650,140 790,55" />
+
+                    <circle class="fill-bg-card stroke-border-light stroke-[1.5]" cx="20" cy="55" r="7"></circle>
+                    <circle class="fill-bg-card stroke-border-light stroke-[1.5]" cx="120" cy="55" r="7"></circle>
+                    <circle class="fill-bg-card stroke-border-light stroke-[1.5]" cx="230" cy="55" r="7"></circle>
+                    <circle class="fill-bg-card stroke-border-light stroke-[1.5]" cx="330" cy="55" r="7"></circle>
+                    <circle class="fill-bg-card stroke-border-light stroke-[1.5]" cx="440" cy="55" r="7"></circle>
+                    <circle class="fill-bg-card stroke-border-light stroke-[1.5]" cx="670" cy="55" r="7"></circle>
+                    <circle class="fill-bg-card stroke-accent stroke-[1.5]" cx="790" cy="55" r="8"></circle>
+                    <circle class="fill-bg-card stroke-secondary stroke-[1.5] stroke-dasharray-[3_2.5]" cx="420" cy="105" r="6"></circle>
+
+                    <text class="font-mono fill-text-secondary text-[11px]" x="20" y="78" text-anchor="middle">cdn</text>
+                    <text class="font-mono fill-text-secondary text-[11px]" x="120" y="78" text-anchor="middle">gateway</text>
+                    <text class="font-mono fill-text-secondary text-[11px]" x="230" y="78" text-anchor="middle">rate limit</text>
+                    <text class="font-mono fill-text-secondary text-[11px]" x="330" y="78" text-anchor="middle">auth</text>
+                    <text class="font-mono fill-text-secondary text-[11px]" x="440" y="78" text-anchor="middle">cache</text>
+                    <text class="font-mono fill-text-secondary text-[11px]" x="670" y="78" text-anchor="middle">servicio</text>
+                    <text class="font-mono fill-text-secondary text-[11px]" x="790" y="78" text-anchor="middle">respuesta</text>
+                    <text class="font-mono fill-text-secondary text-[11px]" x="420" y="128" text-anchor="middle">error handler</text>
+
+                    <text class="font-mono text-[9.5px] tracking-[0.04em] uppercase fill-accent" x="620" y="15" text-anchor="middle">200</text>
+
+                    <text class="font-mono text-[9.5px] tracking-[0.04em] uppercase fill-secondary" x="350" y="120" text-anchor="middle">4xx · 5xx</text>
+
+                    <text class="font-mono text-[9px] fill-text-muted" x="120" y="140" text-anchor="middle">nginx · cloudflare</text>
+                    <text class="font-mono text-[9px] fill-text-muted" x="335" y="148" text-anchor="middle">jwt · oauth2</text>
+                    <text class="font-mono text-[9px] fill-text-muted" x="440" y="160" text-anchor="middle">redis · cache</text>
+                    <text class="font-mono text-[9px] fill-text-muted" x="670" y="148" text-anchor="middle">fastapi · postgres</text>
+
+                    <circle class="fill-accent" r="3.5">
+                        <animateMotion dur="3.5s" begin="0s" repeatCount="indefinite"
+                            path="M20,55 L120,55 L230,55 L330,55 L440,55 Q560,20 670,55 L790,55" />
+                    </circle>
+                    <circle class="fill-secondary" r="3.5">
+                        <animateMotion dur="4s" begin="1.5s" repeatCount="indefinite"
+                            path="M20,55 L120,55 L230,55 L330,55 L420,105 C520,140 650,140 790,55" />
+                    </circle>
+                </svg>
+
+                <div class="flex items-center gap-1.25 ml-0.5 mt-1.5 font-mono text-[10.5px] text-text-muted">
+                    <span class="w-2 h-2 rounded-full inline-block mr-1 bg-accent"></span> 200 ok
+                    <span></span>
+                    <span class="w-2 h-2 rounded-full inline-block mr-1 bg-secondary"></span> 4xx · 5xx
+                </div>
+                <div class="mt-2 font-mono text-[11px] text-white/70">· cdn · gateway · rate limit · auth · cache · servicio</div>
+            </div>
+        </div>
+        <div class="bg-bg-card border border-border rounded-card py-5.5 px-6 font-mono text-[13px] text-text-muted shadow-card transition-[box-shadow,border-color] duration-300 hover:shadow-card-hover hover:border-accent">
+            <div class="flex gap-2 mb-4"><span class="w-2.5 h-2.5 rounded-full bg-border"></span><span class="w-2.5 h-2.5 rounded-full bg-border"></span><span class="w-2.5 h-2.5 rounded-full bg-border"></span></div>
+            <div>GET <span class="text-secondary">/developer/miloz-dev</span></div>
+            <div class="mt-3.5">{`{`}</div>
+            <div class="pl-3.5"><span class="text-accent">"name"</span>: <span class="text-secondary">"Camilo Zapata"</span>,</div>
+            <div class="pl-3.5"><span class="text-accent">"role"</span>: <span class="text-secondary">"Full Stack Developer"</span>,</div>
+            <div class="pl-3.5"><span class="text-accent">"experience_years"</span>: <span class="text-[#8B9CC9]">3</span>,</div>
+            <div class="pl-3.5"><span class="text-accent">"stack"</span>:[<span class="text-secondary">"React"</span>,<span class="text-secondary">"Next.js"</span>],[<span class="text-secondary">"Python"</span>, <span class="text-secondary">"FastAPI"</span>],</div>
+            <div class="pl-3.5"><span class="text-accent">"clients"</span>: [<span class="text-secondary">"CO"</span>, <span class="text-secondary">"ES"</span>, <span class="text-secondary">"US"</span>],</div>
+            <div class="pl-3.5"><span class="text-accent">"based_in"</span>: <span class="text-secondary">"Colombia"</span>,</div>
+            <div class="pl-3.5"><span class="text-accent">"status"</span>: <span class="text-secondary">"Abierto a proyectos"</span></div>
+            <div>{`}`}</div>
+        </div>
+    </div>
+</section>
