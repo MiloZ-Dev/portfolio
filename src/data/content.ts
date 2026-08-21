@@ -12,9 +12,21 @@ export interface Project {
 
 export const experience = [
   {
-    role: "Senior Backend & Systems Engineer",
+  role: "Desarrollador Full Stack (Freelance)",
+  company: "Cliente Casino (Colombia)",
+  period: "Julio 2026 — Presente",
+  modality: "Remoto",
+  bullets: [
+    "Desarrollé un portal multi-tenant en Next.js 15, FastAPI y PostgreSQL para una cadena de 3 puntos de casino con 150 máquinas, reemplazando registros manuales y consolidación semanal en Excel.",
+    "Implementé dashboards en tiempo real con registro contable por usuario, auditoría de turnos y gestión de ingresos/gastos por punto, dando visibilidad total del negocio a 7 usuarios simultáneos.",
+    "Construí arquitectura multi-tenant con roles diferenciados (superadmin + operadores), soporte de archivos en S3 y despliegue en Docker.",
+  ],
+    tags: ["Next.js", "FastAPI", "PostgreSQL", "Docker", "TypeScript", "Tailwind CSS"],
+  },
+  {
+    role: "Backend & Systems Engineer",
     company: "Kickoff Advertising (Estados Unidos)",
-    period: "Mayo 2026 — Presente",
+    period: "Mayo 2026 — Agosto 2026",
     modality: "Remoto",
     bullets: [
       "Asumí un sistema de lead routing fintech en estado crítico y lideré una reestructuración integral del 90% de la plataforma, escalando de 1 a 4 partners y 4 lenders activos en producción.",
@@ -36,20 +48,21 @@ export const experience = [
     ],
     tags: ["React", "Next.js", "Python", "FastAPI", "SQL","PostgreSQL","OR-Tools", "OpenRouteService", "Tailwind CSS",],
   },
-  {
-    role: "Desarrollador Full Stack (Freelance)",
-    company: "El Rocket (Colombia)",
-    period: "Abril 2024 — Julio 2025",
-    modality: "Remoto",
-    bullets: [
-      "Construí interfaces web con React, Next.js y Tailwind CSS desde diseños en Figma para múltiples clientes de la consultora.",
-      "Desarrollé APIs REST con Node.js y Express.js, y pipelines ETL con Python y Pandas para limpieza y transformación de datos de negocio.",
-    ],
-    tags: ["React", "Next.js", "Node.js", "Express", "Pandas", "Tailwind CSS", "Python", "PostgreSQL", "FastAPI"],
-  },
+  
 ];
 
 export const projects: Project[] = [
+  {
+  name: "Pipeline AWS — GFourmis",
+  roleTag: "Proyecto personal",
+  description:
+    "Pipeline serverless en Python para análisis de ventas y predicción financiera: S3, Lambda, SQS, Step Functions, Glue y generación de predicciones en lenguaje natural con Amazon Bedrock.",
+  tags: ["Python", "AWS Lambda", "S3", "Step Functions", "Glue", "Bedrock"],
+  repoUrl: null,
+  demoUrl: null,
+  demoLabel: "Privado",
+  image: 'pipeline/pipeline-cover.jpg',
+  },
   {
     name: "CLIA — Climate Intelligence & Analytics",
     roleTag: "Proyecto personal",
