@@ -1,28 +1,42 @@
 ---
 import { experience } from '../data/content';
+
+
+// En desktop la tarjeta destacada va al centro (order-2); el resto conserva su orden relativo.
+// En móvil se mantiene el orden del arreglo (más reciente primero).
+let sideIndex = 0;
+const desktopOrder = (prominent?: boolean) =>
+    prominent ? 'md:order-2' : sideIndex++ === 0 ? 'md:order-1' : 'md:order-3';
+
 ---
 <div class="relative">
-    <section class="layer sticky top-0 z-10 bg-bg-primary max-w-295 mx-auto px-7 pt-16 pb-10 border-b border-border opacity-0 translate-y-4 transition-[opacity,transform] duration-600ms ease-out [&.in-view]:opacity-100 [&.in-view]:translate-y-0" id="experience" data-layer-name="Experiencia">
+    <section class="layer sticky top-0 z-10 bg-bg-primary max-w-295 mx-auto px-7 pt-16 pb-10 border-b border-border opacity-0 translate-y-4 transition-[opacity,transform] duration-600 ease-out [&.in-view]:opacity-100 [&.in-view]:translate-y-0" id="experience" data-layer-name="Experiencia">
         <div class="eyebrow font-mono text-[12.5px] text-accent tracking-[0.08em] uppercase flex items-center gap-2.5  before:content-[''] before:w-6 before:h-0.5 before:bg-linear-to-r before:from-accent before:to-secondary before:rounded-sm">02 — Experiencia</div>
         <h2 class="section-title text-[1.7rem] sm:text-[2.1rem] font-bold font-display">Ultimas 3 Experiencia</h2>
 
-        <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mt-10">
             {experience.map((job) => (
                 <article
                     class:list={[
                         "exp-card relative bg-bg-card rounded-card p-5 sm:p-6 shadow-card transition-all duration-300",
-                        "hover:border-accent hover:shadow-card-hover hover:-translate-y-1",
+                        desktopOrder(job.prominent),
                         job.prominent
-                            ? "border-2 border-secondary"
-                            : "border border-border",
+                            ? "border-2 border-secondary z-10 md:scale-105 md:-translate-y-3 md:p-8 shadow-[0_20px_50px_-15px_var(--color-secondary-dim)] md:hover:-translate-y-4 hover:border-secondary"
+                            : "border border-border hover:border-accent hover:shadow-card-hover hover:-translate-y-1",
                     ]}
                 >
-                    <div class="flex items-center gap-2 mb-2">
-                        <span class="w-3 h-3 rounded-full bg-accent shrink-0 shadow-[0_0_0_4px_var(--color-accent-dim)]"></span>
-                        <span class="font-mono text-xs text-text-muted whitespace-nowrap">{job.period} |</span>
-                        <br/>
-                        <span class="font-mono text-xs text-text-muted whitespace-nowrap">{job.modality}</span>
+                    <div class="mb-3">
+                        <div class="flex items-center gap-2">
+                            <span class="w-3 h-3 rounded-full bg-accent shrink-0 shadow-[0_0_0_4px_var(--color-accent-dim)]"></span>
+                            <span class:list={[
+                                "font-mono",
+                                job.prominent ? "text-sm font-semibold text-secondary" : "text-xs text-text-muted",
+                            ]}>{job.period}</span>
+                        </div>
+                        <div class="font-mono text-xs text-text-muted pl-5 mt-0.5">{job.modality}</div>
                     </div>
+
+                    
                     <h3 class="font-display text-xl font-semibold mb-1">{job.role}</h3>
                     <div class="text-accent font-semibold mb-2.5 text-[0.95rem]">{job.company}</div>
                     <ul class="flex flex-col gap-1.5 mb-3">

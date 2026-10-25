@@ -12,16 +12,16 @@ export interface Project {
 
 export const experience = [
   {
-  role: "Desarrollador Full Stack (Freelance)",
-  company: "Cliente Casino (Colombia)",
-  period: "Julio 2026 — Presente",
-  modality: "Remoto",
-  bullets: [
-    "Desarrollé un portal multi-tenant en Next.js 15, FastAPI y PostgreSQL para una cadena de 3 puntos de casino con 150 máquinas, reemplazando registros manuales y consolidación semanal en Excel.",
-    "Implementé dashboards en tiempo real con registro contable por usuario, auditoría de turnos y gestión de ingresos/gastos por punto, dando visibilidad total del negocio a 7 usuarios simultáneos.",
-    "Construí arquitectura multi-tenant con roles diferenciados (superadmin + operadores), soporte de archivos en S3 y despliegue en Docker.",
-  ],
-    tags: ["Next.js", "FastAPI", "PostgreSQL", "Docker", "TypeScript", "Tailwind CSS"],
+    role: "Desarrollador Full Stack & Cloud (Freelance)",
+    company: "GFourmis (Colombia)",
+    period: "Agosto 2026 — Presente",
+    modality: "Remoto",
+    bullets: [
+      "Migré el sitio corporativo de WordPress a una arquitectura headless con Strapi 5 (CMS) y Astro (SSG), permitiendo que marketing publique blogs y noticias de forma autónoma, con plantillas de página asistidas por IA seleccionables desde el CMS.",
+      "Diseñé y aprovisioné toda la infraestructura en AWS con CDK (TypeScript): ECS Fargate con ALB y autoscaling, Aurora PostgreSQL Serverless v2, S3 + CloudFront, ECR y Secrets Manager, separada por ambientes dev/prod.",
+      "Implementé CI/CD completo (CodePipeline/CodeBuild con rollback automático y GitHub Actions con OIDC) y automaticé la publicación: un cambio en Strapi dispara una Lambda que reconstruye y despliega el sitio sin intervención manual.",
+    ],
+    tags: ["Strapi 5", "Astro", "AWS CDK", "ECS Fargate", "Aurora PostgreSQL", "GitHub Actions"],
   },
   {
     role: "Backend & Systems Engineer",
@@ -29,8 +29,7 @@ export const experience = [
     period: "Mayo 2026 — Agosto 2026",
     modality: "Remoto",
     bullets: [
-      "Asumí un sistema de lead routing fintech en estado crítico y lideré una reestructuración integral del 90% de la plataforma, escalando de 1 a 4 partners y 4 lenders activos en producción.",
-      "Migré la arquitectura de subasta de leads a un waterfall round-robin con ventana exclusiva por lender y encolamiento de leads rechazados hacia un canal SMS externo.",
+      "Asumí un sistema de lead routing fintech en estado crítico y lideré una reestructuración integral del 90% de la plataforma, pasando de 1 a 3 partners y de 1 a 4 lenders activos en producción.",      "Migré la arquitectura de subasta de leads a un waterfall round-robin con ventana exclusiva por lender y encolamiento de leads rechazados hacia un canal SMS externo.",
       "Construí desde cero el Waterfall Validator, un CRM interno en React/TypeScript con visualización en tiempo real del flujo de cada lead.",
     ],
     tags: ["Python","FastAPI", "MongoDB", "React", "TypeScript"],
@@ -61,7 +60,7 @@ export const projects: Project[] = [
   repoUrl: null,
   demoUrl: null,
   demoLabel: "Privado",
-  image: 'pipeline/pipeline-cover.jpg',
+  image: '/pipeline/pipeline-cover.jpg',
   },
   {
     name: "CLIA — Climate Intelligence & Analytics",
@@ -69,7 +68,7 @@ export const projects: Project[] = [
     description:
       "Pipeline ETL con ingesta automatizada desde 3 APIs meteorológicas para 120+ ciudades, forecasting con Prophet y análisis de riesgo agrícola en lenguaje natural vía Claude.",
     tags: ["React/Vite", "TypeScript", "Python/FastAPI", "Docker", "PostgreSQL", "Claude API"],
-    repoUrl: "#",
+    repoUrl: null,
     demoUrl: "https://www.loom.com/share/a094c6e34e2b46b19a12ebfa6a9be54d",
     demoLabel: "Demo",
     image: '/clia/clia-cover.jpg',
@@ -102,20 +101,17 @@ export const projects: Project[] = [
 export const skillCategories = [
   {
     label: "Frontend",
-    items: ["React", "Next.js", "TypeScript", "JavaScript", "Tailwind CSS", "React Native", "Figma"],
-  },
+    items: ["React", "Next.js", "Astro", "TypeScript", "JavaScript", "Tailwind CSS", "React Native", "Figma"],  },
   {
     label: "Backend",
-    items: ["Python", "FastAPI", "Node.js", "Express.js", "REST APIs", "WebSockets", "Pytest"],
-  },
+    items: ["Python", "FastAPI", "Node.js", "Express.js", "REST APIs", "WebSockets", "WebHooks", "Strapi", "Pytest"],  },
   {
     label: "Datos",
     items: ["PostgreSQL", "MongoDB", "MySQL", "Pandas", "NumPy", "ETL"],
   },
   {
     label: "Infraestructura & otros",
-    items: ["Docker", "Google Cloud", "Git / GitHub", "CI/CD", "Linux / SSH", "OR-Tools", "Claude Code"],
-  },
+    items: ["Docker", "AWS", "AWS CDK", "Google Cloud", "Git / GitHub", "GitHub Actions", "CI/CD", "Linux / SSH", "OR-Tools", "Claude Code"],  },
 ];
 
 export const featuredSkills = [
